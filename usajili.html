@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jisajili | KadiDigitali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style mpya kwa ajili ya kuonyesha taarifa baada ya usajili */
+        
+        #registrationResult {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fdfefe;
+            border-radius: 15px;
+            border: 1px solid #27ae60;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .stats-card {
+            background: #f1f8e9;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .stats-box {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: block;
+        }
+        
+        .stats-label {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .id-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body class="auth-body">
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Anza Sasa</h2>
+                <p>Tengeneza akaunti yako ya KadiDigitali</p>
+            </div>
+
+            <form id="registerForm" onsubmit="jisajiliMtumiaji(event)">
+                <div class="form-group">
+                    <label for="fullname">Jina Kamili</label>
+                    <input type="text" id="fullname" placeholder="Jina lako kamili" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Barua Pepe</label>
+                    <input type="email" id="regEmail" placeholder="mfano@barua.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Nenosiri</label>
+                    <input type="password" id="regPassword" placeholder="Tengeneza nenosiri" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Hakiki Nenosiri</label>
+                    <input type="password" id="confirmPassword" placeholder="Rudia nenosiri" required>
+                </div>
+
+                <button type="submit" class="btn-submit" style="background-color: #27ae60; width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 600;">Jisajili Sasa</button>
+            </form>
+
+            <div id="registrationResult">
+                <div class="id-badge">ID YAKO: <span id="nambaID">0000</span></div>
+                <h3 style="color: #27ae60;">Usajili Umekamilika!</h3>
+                <p style="font-size: 0.85rem; color: #7f8c8d;">Hali ya sherehe yako kwa sasa:</p>
+
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <span class="stats-label">Waliojiunga</span>
+                        <span class="stats-box" id="idadiWageni" style="color: #d35400;">0</span>
+                    </div>
+                    <div class="stats-card">
+                        <span class="stats-label">Michango (TSH)</span>
+                        <span class="stats-box" id="kiasiMichango" style="color: #27ae60;">0</span>
+                    </div>
+                </div>
+
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #666;">Tumia barua pepe yako kuingia (Login) kuona orodha kamili ya majina.</p>
+
+                <a href="dashboard.html" class="btn-submit" style="background-color: #2c3e50; text-decoration: none; display: block; margin-top: 15px; color: white; padding: 10px; border-radius: 8px;">Nenda Kwenye Dashibodi</a>
+            </div>
+
+            <div class="login-footer" style="text-align: center; margin-top: 15px;">
+                <p>Tayari una akaunti? <a href="login.html" style="color: #27ae60; font-weight: 600;">Ingia hapa</a></p>
+                <a href="index.html" class="home-link" style="color: #888; text-decoration: none; font-size: 0.8rem;">← Rudi Nyumbani</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function jisajiliMtumiaji(event) {
+            event.preventDefault();
+
+            // 1. Chukua taarifa kutoka kwenye fomu
+            const jina = document.getElementById('fullname').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (pass !== confirm) {
+                alert("Nenosiri halijafanana!");
+                return;
+            }
+
+            // 2. Takwimu za Mwanzo (Zinaweza kuanza na 0 kwa mtumiaji mpya)
+            const wageniMwanzo = 0;
+            const michangoMwanzo = 0;
+            const idYako = "KD-" + Math.floor(1000 + Math.random() * 9000);
+
+            // 3. HIFADHI DATA KWENYE LOCALSTORAGE ILI DASHIBODI IZISOME
+            // Tunahifadhi kwa majina yale yale ambayo Dashboard.html inatafuta
+            localStorage.setItem('mtumiaji_aliyejisajili', jina);
+            localStorage.setItem('mtumiaji_email', email);
+            localStorage.setItem('mtumiaji_password', pass); // Kwa ajili ya uhakiki wa login
+            localStorage.setItem('idadi_wageni', wageniMwanzo);
+            localStorage.setItem('jumla_michango', michangoMwanzo);
+            localStorage.setItem('nambaID', idYako);
+
+            // Muhimu: Hii inamfanya awe "Logged In" moja kwa moja baada ya kujisajili
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // 4. Onyesha matokeo na Ficha fomu
+            document.getElementById('registerForm').style.display = 'none';
+            document.querySelector('.login-header').style.display = 'none';
+            document.getElementById('registrationResult').style.display = 'block';
+
+            document.getElementById('idadiWageni').innerText = wageniMwanzo + " Wageni";
+            document.getElementById('kiasiMichango').innerText = michangoMwanzo.toLocaleString() + " /=";
+            document.getElementById('nambaID').innerText = idYako;
+        }
+    </script>
+</body>
+
+</html>

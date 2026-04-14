@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eneo la Sherehe | KadiDigitali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .map-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-header {
+            padding: 20px;
+            background: #d4af37;
+            /* Dhahabu */
+            color: white;
+            text-align: center;
+        }
+        /* Sehemu ya Ramani (Google Maps Placeholder) */
+        
+        .google-map {
+            width: 100%;
+            height: 400px;
+            background: #eee;
+            border: none;
+        }
+        /* Sehemu ya Key / Maelekezo */
+        
+        .location-key {
+            padding: 30px;
+        }
+        
+        .key-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .key-icon {
+            background: #d4af37;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        .key-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .key-text p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .btn-navigation {
+            display: block;
+            text-align: center;
+            background: #27ae60;
+            /* Rangi ya Kijani */
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .btn-navigation:hover {
+            background: #219150;
+        }
+        
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #d4af37;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="map-container">
+        <div class="map-header">
+            <h2>Eneo la Sherehe</h2>
+            <p>Tunakusubiri kwa hamu!</p>
+        </div>
+
+        <iframe class="google-map" src="

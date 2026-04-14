@@ -1,0 +1,446 @@
+/* Usanifu wa Jumla */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* Fonti ya kisasa */
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+/* Sehemu ya Hero (Yenye Video) */
+
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgb(22, 6, 6);
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+
+/* Kufanya video isiwe angavu sana ili maandishi yasomeke */
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.829), rgba(0, 0, 0, 0.3));
+    z-index: 0;
+}
+
+
+/* Maandishi ya Kati */
+
+.content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.content h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    /* Ukubwa unabadilika kulingana na kioo */
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+
+/* Kitufe (Button) */
+
+.btn-start {
+    padding: 18px 45px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #d4af37;
+    /* Rangi ya dhahabu */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-start:hover {
+    background: #b8962e;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Muonekano wa Simu (Mobile Responsive) */
+
+@media (max-width: 768px) {
+    .content h1 {
+        font-size: 2.5rem;
+    }
+    .content p {
+        font-size: 1rem;
+    }
+}
+
+
+/* Sehemu ya Picha za Wahusika */
+
+.couples-section {
+    padding: 60px 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.couples-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.couple-card {
+    text-align: center;
+}
+
+.couple-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* Inazifanya ziwe duara */
+    object-fit: cover;
+    border: 5px solid #e67e22;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.couple-card img:hover {
+    transform: scale(1.05);
+}
+
+.couple-card h3 {
+    margin-top: 15px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.couple-card p {
+    color: #e67e22;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+
+/* Container inayobeba kibox cha tangazo */
+
+.app-ad-container {
+    padding: 60px 20px;
+    background-color: #fdfdfd;
+    /* Rangi ya background laini sana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Kibox chenyewe cha Tangazo */
+
+.ad-box {
+    width: 100%;
+    max-width: 850px;
+    /* Upana wa kutosha kuonekana vizuri */
+    background: #ffffff;
+    border-radius: 20px;
+    /* Kona za duara zaidi */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    /* Kivuli laini */
+    border: 1px solid rgba(230, 126, 34, 0.2);
+    /* Mstari hafifu wa rangi ya machungwa */
+    transition: all 0.4s ease;
+    /* Kufanya mabadiliko yawe laini */
+}
+
+
+/* Style ya picha ndani ya box */
+
+.ad-box img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    /* Inazuia picha kuwa ndefu sana */
+    object-fit: cover;
+    /* Inahakikisha picha inakaa vizuri bila kukatika vibaya */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+
+/* Maelezo yaliyo chini ya picha */
+
+.ad-text {
+    padding: 25px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.ad-text h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.ad-text p {
+    color: #7f8c8d;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+
+/* Hover Effect: Mteja akigusa kibox kwa mouse */
+
+.ad-box:hover {
+    transform: translateY(-10px);
+    /* Kinanyanyuka kidogo juu */
+    box-shadow: 0 20px 45px rgba(230, 126, 34, 0.2);
+    /* Kivuli kinaongezeka rangi */
+    border-color: #e67e22;
+    /* Mstari unakuwa na rangi kamili */
+}
+
+.ad-box:hover img {
+    transform: scale(1.05);
+    /* Picha inajikuza kidogo (zoom) */
+}
+
+
+/* Responsive: Kwa ajili ya simu za mkononi */
+
+@media (max-width: 768px) {
+    .ad-box {
+        max-width: 95%;
+    }
+    .ad-text h3 {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Maandalizi ya awali */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-body {
+    background: linear-gradient(135deg, #2c3e50, #e67e22);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+/* Container ya Login */
+
+.login-wrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.login-header p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+
+/* Style za Fomu */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #e67e22;
+    background-color: #fffaf5;
+}
+
+
+/* Kitufe cha kuingia */
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #d35400;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+}
+
+
+/* Sehemu ya chini (Links) */
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.login-footer p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.login-footer a {
+    color: #e67e22;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+.home-link {
+    display: block;
+    font-size: 0.8rem;
+    color: #999 !important;
+    font-weight: 400 !important;
+}
+
+
+/* Responsive kwa simu ndogo */
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+}
+
+
+/* Hakikisha msimbo huu upo kwenye style.css yako */
+
+.auth-body {
+    background: linear-gradient(135deg, #2c3e50, #e67e22);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+
+/* Rangi ya kijani kwa kitufe cha kusajili ili kitofautiane na kuingia */
+
+#registerForm .btn-submit {
+    background-color: #27ae60;
+}
+
+#registerForm .btn-submit:hover {
+    background-color: #219150;
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+
+/* Maeneo ya kuandikia (Inputs) */
+
+.form-group input:focus {
+    border-color: #27ae60;
+    /* Inabadilika kuwa kijani mteja anapoandika */
+}

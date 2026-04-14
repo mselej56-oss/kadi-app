@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingia | KadiDigitali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-body {
+            background: linear-gradient(135deg, #2c3e50, #e67e22);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-header h2 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .login-header p {
+            margin-bottom: 25px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background: #d35400;
+        }
+        /* --- DASHBOARD STYLE (Inaonekana baada ya Login) --- */
+        
+        #dashboardArea {
+            display: none;
+            text-align: center;
+        }
+        
+        .stat-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-box {
+            background: #fdf2e9;
+            padding: 20px;
+            border-radius: 12px;
+            border-bottom: 4px solid #e67e22;
+        }
+        
+        .stat-val {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #e67e22;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .login-footer a {
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .home-link {
+            display: block;
+            margin-top: 15px;
+            color: #888 !important;
+        }
+    </style>
+</head>
+
+<body class="auth-body">
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <div id="loginArea">
+                <div class="login-header">
+                    <h2>Karibu Tena</h2>
+                    <p>Ingia kuendelea na KadiDigitali</p>
+                </div>
+
+                <form id="loginForm" onsubmit="fanyaLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Barua Pepe</label>
+                        <input type="email" id="email" placeholder="mfano@barua.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Nenosiri</label>
+                        <input type="password" id="password" placeholder="********" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Ingia Sasa</button>
+                </form>
+            </div>
+
+            <div id="dashboardArea">
+                <div class="login-header">
+                    <h2 id="userGreeting">Habari!</h2>
+                    <p>Maendeleo ya mwaliko wako</p>
+                </div>
+
+                <div class="stat-container">
+                    <div class="stat-box">
+                        <span class="stat-label">Wageni Waliojiunga</span>
+                        <span class="stat-val" id="dashWageni">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Jumla ya Michango</span>
+                        <span class="stat-val" id="dashMichango">TSH 0</span>
+                    </div>
+                </div>
+
+                <button onclick="window.location.reload()" class="btn-submit" style="background: #2c3e50;">Toka Nje</button>
+            </div>
+
+            <div class="login-footer">
+                <p id="footerText">Huna akaunti? <a href="create-account.html">Jisajili hapa</a></p>
+                <a href="index.html" class="home-link">← Rudi Nyumbani</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fanyaLogin(event) {
+            event.preventDefault();
+
+            // 1. Pata data kutoka localStorage (Zilizohifadhiwa wakati wa usajili)
+            const jina = localStorage.getItem('mtumiaji_aliyejisajili') || "Msimamizi";
+            const wageni = localStorage.getItem('idadi_wageni') || "0";
+            const michango = localStorage.getItem('jumla_michango') || "0";
+
+            // 2. Ficha fomu na uonyeshe Dashboard
+            document.getElementById('loginArea').style.display = 'none';
+            document.getElementById('footerText').style.display = 'none';
+            document.getElementById('dashboardArea').style.display = 'block';
+
+            // 3. Jaza data kwenye Dashboard
+            document.getElementById('userGreeting').innerText = "Habari, " + jina;
+            document.getElementById('dashWageni').innerText = wageni + " Wageni";
+            document.getElementById('dashMichango').innerText = "TSH " + Number(michango).toLocaleString();
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

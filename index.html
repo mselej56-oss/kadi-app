@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KadiDigitali | Kitaalamu & Kisasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* --- NETFLIX STYLE SPLASH SCREEN --- */
+        
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s;
+        }
+        
+        .splash-logo {
+            width: 150px;
+            z-index: 10;
+            animation: netflix-intro 2.5s ease-in-out forwards;
+        }
+        
+        @keyframes netflix-intro {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+                filter: brightness(0);
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+                filter: brightness(1.2);
+            }
+            80% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        .splash-bg-reveal {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('09.jpg.png') no-repeat center center/cover;
+            opacity: 0.2;
+            animation: bg-zoom 3s ease-out forwards;
+        }
+        
+        @keyframes bg-zoom {
+            from {
+                transform: scale(1.2);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+        /* --- Navbar --- */
+        
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.6rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #e67e22;
+        }
+        /* --- Hero Section --- */
+        
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2), #fff);
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .btn-start {
+            padding: 16px 50px;
+            font-size: 1.1rem;
+            color: white;
+            background: #e67e22;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.4s;
+            display: inline-block;
+        }
+        
+        .btn-start:hover {
+            background: #d35400;
+            transform: scale(1.05);
+        }
+        /* --- FEATURES --- */
+        
+        .features {
+            padding: 80px 5%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        
+        .feature-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .feature-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .feature-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        .feature-text p {
+            font-size: 1.2rem;
+            color: #444;
+        }
+        
+        .feature-visuals {
+            flex: 1;
+            position: relative;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .visual-card {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s;
+        }
+        
+        .visual-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .visual-card video,
+        .visual-card img {
+            width: 100%;
+            display: block;
+        }
+        /* --- App Ad Section --- */
+        
+        .app-ad-container {
+            padding: 80px 5%;
+            background: #000;
+            color: #ff790b;
+        }
+        
+        .ad-box {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .ad-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .ad-image img {
+            width: 80%;
+            border-radius: 20px;
+        }
+        
+        .ad-content {
+            flex: 1;
+        }
+        
+        .ad-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+            .feature-row {
+                text-align: center;
+            }
+            .feature-text h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="splash-screen">
+        <div class="splash-bg-reveal"></div>
+        <img src="log.1.png" alt="Logo" class="splash-logo">
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">KadiDigitali</a>
+        <ul>
+            <li><a href="index.html">Nyumbani</a></li>
+            <li><a href="about.html">Kuhusu Sisi</a></li>
+            <li><a href="usajili.html">Jisajili</a></li>
+            <li><a href="ingiya.html">Ingia</a></li>
+            <li><a href="mwaliko .html">mwaliko</a></li>
+            <li><a href="dashboard.html">dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="01.mp4.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>Filamu ya Maisha Yako Inaanza Hapa</h1>
+            <a href="form.html" id="action-button" class="btn-start" style="display: none;">Tengeneza Kadi Sasa</a>
+            <a href="usajili.html" id="register-button" class="btn-start">Anza Sasa</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-row">
+            <div class="feature-text">
+                <h2>Ubunifu Usio na Mipaka</h2>
+                <p>Mialiko yako sasa ina hadhi ya filamu. Ongeza muziki, ramani, na video za kusisimua kwa sekunde chache.</p>
+            </div>
+            <div class="feature-visuals">
+                <div class="visual-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="01.mp4.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="app-ad-container">
+        <div class="ad-box">
+            <div class="ad-image">
+                <img src="09.jpg.png" alt="App Preview">
+            </div>
+            <div class="ad-content">
+                <h3>KadiDigitali Mobile</h3>
+                <p>Pakua App yetu uweze kusimamia mialiko yako kiganjani mwako.</p>
+                <a href="#" class="btn-start" style="background: #e50914;">Pakua Sasa</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Splash Screen Logic
+        window.addEventListener('load', function() {
+            const splash = document.getElementById('splash-screen');
+            setTimeout(() => {
+                splash.classList.add('hidden');
+            }, 2500);
+        });
+
+        // Authentication & UI Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const actionButton = document.getElementById('action-button');
+            const registerButton = document.getElementById('register-button');
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+            if (isLoggedIn === 'true') {
+                actionButton.style.display = "inline-block";
+                registerButton.style.display = "none";
+            } else {
+                actionButton.style.display = "none";
+                registerButton.style.display = "inline-block";
+            }
+        });
+    </script>
+</body>
+
+</html>

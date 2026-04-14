@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mwaliko na Michango</title>
+    <style>
+         :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --light-bg: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .section {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        
+        .about-us {
+            background: var(--light-bg);
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .invitation-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .pay-button {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            width: 90%;
+        }
+        
+        .pay-button:hover {
+            background: #128C7E;
+        }
+        
+        .payment-info {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        #namba_ya_kumbukumbu {
+            display: block;
+            background: #000;
+            color: #fff;
+            padding: 5px;
+            margin-top: 10px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body onload="badilishaNamba()">
+
+    <section class="section about-us">
+        <h2>Kuhusu Sisi</h2>
+        <p>Sisi ni timu inayofanya kazi kuhakikisha kumbukizi ya Muungano inafana. Tunakukaribisha kushiriki nasi kwa hali na mali.</p>
+    </section>
+
+    <section class="section">
+        <div class="invitation-box">
+            <h2>Fomu ya Mshiriki</h2>
+            <p>Jaza taarifa zako hapa chini na utume mchango wako.</p>
+
+            <form id="contributionForm">
+                <input type="text" id="jina" placeholder="Jina Lako Kamili" required>
+                <input type="tel" id="simu" placeholder="Namba yako ya Simu (Mf: 07xxx)" required>
+                <input type="number" id="kiasi" placeholder="Kiasi cha Kuchangia (TSH)" required>
+                <input type="text" id="muamala" placeholder="Namba ya Muamala (Transaction ID)" required>
+
+                <div class="payment-info" onclick="badilishaNamba()">
+                    LIPA KWA NAMBA: <br>
+                    <span style="font-size: 20px; color: #d35400;">Lipa Namba: 556677</span> <br> Jina: MR JACKSON
+                    <hr>
+                    <small>NAMBA YA KUINGILIA KUMBINI:</small>
+                    <span id="namba_ya_kumbukumbu">...</span>
+                </div>
+
+                <br>
+                <button type="button" onclick="tumaMchango()" class="pay-button">TUMA TAARIFA WHATSAPP</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function badilishaNamba() {
+            const mpya = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('namba_ya_kumbukumbu').innerText = "ENTRY-" + mpya;
+        }
+
+        function tumaMchango() {
+            const nambaYaWhatsApp = "255780777380";
+
+            const jina = document.getElementById('jina').value;
+            const simu = document.getElementById('simu').value;
+            const kiasi = document.getElementById('kiasi').value;
+            const muamala = document.getElementById('muamala').value;
+            const nambaKumbukumbu = document.getElementById('namba_ya_kumbukumbu').innerText;
+
+            if (jina === "" || simu === "" || kiasi === "" || muamala === "") {
+                alert("Tafadhali jaza nafasi zote ikijumuisha namba ya muamala.");
+                return;
+            }
+
+            // --- KODI YA KUHIFADHI KWENYE DASHIBODI BINAFSI ---
+            const adminEmail = localStorage.getItem('mtumiaji_email');
+            const userDatabaseKey = 'data_' + adminEmail;
+
+            const mgeniMpya = {
+                jina: jina,
+                kiasi: kiasi,
+                simu: simu,
+                muamala: muamala // Imehifadhiwa pia kwenye dashibodi
+            };
+
+            let hifadhi = JSON.parse(localStorage.getItem(userDatabaseKey)) || [];
+            hifadhi.push(mgeniMpya);
+            localStorage.setItem(userDatabaseKey, JSON.stringify(hifadhi));
+            // --- MWISHO WA KODI YA KUHIFADHI ---
+
+            const ujumbe = `*TAARIFA MPYA YA MCHANGO*%0A` +
+                `----------------------------%0A` +
+                `*Mchangiaji:* ${jina}%0A` +
+                `*Namba ya Simu:* ${simu}%0A` +
+                `*Kiasi:* TSH ${kiasi}%0A` +
+                `*Namba ya Muamala:* ${muamala}%0A` +
+                `*Namba ya Kumbukumbu:* ${nambaKumbukumbu}%0A` +
+                `----------------------------%0A` +
+                `_Nimeshalipa kupitia Lipa Namba: 556677 (MR JACKSON)_`;
+
+            const link = `https://wa.me/${nambaYaWhatsApp}?text=${ujumbe}`;
+            window.open(link, '_blank').focus();
+        }
+    </script>
+
+</body>
+
+</html>
